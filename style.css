@@ -1,7 +1,84 @@
-.conts{
-    border-radius: 8px;
+body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: white;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 80%;
+    max-width: 600px;
+}
+
+.hidden {
+    display: none;
+}
+
+h1, h2 {
+    font-family: 'Pacifico', cursive;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.signature {
+    font-style: italic;
+}
+
+.countdown {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1rem;
+    color: white;
+    background-color: #ff4081;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #f50057;
+}
+
+#recordsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#recordsTable th, #recordsTable td {
+    border: 1px solid white;
+    padding: 10px;
+}
+
+#recordsTable th {
+    background-color: #ff4081;
+}
+
+#recordsTable td {
+    background-color: rgba(255, 255, 255, 0.2);
 }
