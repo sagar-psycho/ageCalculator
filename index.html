@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Friendship Day Wishes</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -17,10 +17,19 @@
             <p class="signature">With love, SAGAR</p>
         </div>
         <div class="game">
-            <h3>Guess the Number!</h3>
-            <p>Guess a number between 1 and 100:</p>
-            <input type="number" id="guessInput" min="1" max="100">
-            <button id="guessButton">Guess</button>
+            <h3>Color Matching Game!</h3>
+            <p>Match the displayed color with its name:</p>
+            <div id="colorDisplay" class="color-box"></div>
+            <select id="colorOptions">
+                <option value="" disabled selected>Select the color</option>
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+                <option value="yellow">Yellow</option>
+                <option value="purple">Purple</option>
+                <option value="orange">Orange</option>
+            </select>
+            <button id="submitGuess">Submit Guess</button>
             <button id="restartButton" class="hidden">Restart</button>
             <p id="feedback"></p>
             <h4>Game Records:</h4>
@@ -28,7 +37,7 @@
                 <thead>
                     <tr>
                         <th>Game</th>
-                        <th>Guesses</th>
+                        <th>Result</th>
                     </tr>
                 </thead>
                 <tbody id="recordsBody">
