@@ -1,6 +1,6 @@
 // Countdown Timer
 const countdown = document.getElementById('countdown');
-const friendshipDay = new Date('August 3, 2024 00:00:00').getTime();
+const friendshipDay = new Date('August 4, 2024 00:00:00').getTime();
 
 const updateCountdown = () => {
     const now = new Date().getTime();
