@@ -1,6 +1,6 @@
 // Countdown Timer
 const countdown = document.getElementById('countdown');
-const friendshipDay = new Date('August 4, 2024 00:00:00').getTime();
+const friendshipDay = new Date('August 3, 2024 00:00:00').getTime();
 
 const updateCountdown = () => {
     const now = new Date().getTime();
@@ -11,76 +11,81 @@ const updateCountdown = () => {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    countdown.innerHTML = `Contdowm: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    countdown.innerHTML = `Time until Friendship Day: ${days}d ${hours}h ${minutes}m ${seconds}s`;
 
     if (distance < 0) {
         clearInterval(interval);
         countdown.innerHTML = 'Happy Friendship Day!';
         document.getElementById('content').classList.remove('hidden');
+        document.getElementById('countdown').style.display = 'none';
+        document.querySelector('.game').style.display = 'none';
     }
 };
 
 const interval = setInterval(updateCountdown, 1000);
 
-// Guess the Number Game
-const guessInput = document.getElementById('guessInput');
-const guessButton = document.getElementById('guessButton');
+// Color Matching Game
+const colorDisplay = document.getElementById('colorDisplay');
+const colorOptions = document.getElementById('colorOptions');
+const submitGuess = document.getElementById('submitGuess');
 const restartButton = document.getElementById('restartButton');
 const feedback = document.getElementById('feedback');
 const recordsBody = document.getElementById('recordsBody');
-let numberToGuess;
-let guesses;
-let gameNumber = 1;
+const colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
+let correctColor;
+let gameNumber;
 
-const generateNumber = () => Math.floor(Math.random() * 100) + 1;
+// Function to get a random color
+const getRandomColor = () => colors[Math.floor(Math.random() * colors.length)];
 
+// Function to load game records
 const loadRecords = () => {
-    const records = JSON.parse(localStorage.getItem('gameRecords')) || [];
+    const records = JSON.parse(localStorage.getItem('colorGameRecords')) || [];
     recordsBody.innerHTML = '';
     records.forEach(record => {
         const row = document.createElement('tr');
-        row.innerHTML = `<td>${record.game}</td><td>${record.guesses}</td>`;
+        row.innerHTML = `<td>${record.game}</td><td>${record.result}</td>`;
         recordsBody.appendChild(row);
     });
+    gameNumber = records.length + 1;
 };
 
-const saveRecord = (guesses) => {
-    const records = JSON.parse(localStorage.getItem('gameRecords')) || [];
-    records.push({ game: gameNumber, guesses });
-    localStorage.setItem('gameRecords', JSON.stringify(records));
+// Function to save game record
+const saveRecord = (result) => {
+    const records = JSON.parse(localStorage.getItem('colorGameRecords')) || [];
+    records.push({ game: gameNumber, result });
+    localStorage.setItem('colorGameRecords', JSON.stringify(records));
     gameNumber++;
+    loadRecords();
 };
 
+// Function to start a new game
 const startNewGame = () => {
-    numberToGuess = generateNumber();
-    guesses = 0;
+    correctColor = getRandomColor();
+    colorDisplay.style.backgroundColor = correctColor;
     feedback.textContent = '';
-    guessInput.value = '';
-    guessInput.disabled = false;
-    guessButton.disabled = false;
+    colorOptions.value = '';
     restartButton.classList.add('hidden');
 };
 
-guessButton.addEventListener('click', () => {
-    const userGuess = parseInt(guessInput.value);
-    guesses++;
+// Event listener for submitting a guess
+submitGuess.addEventListener('click', () => {
+    const userGuess = colorOptions.value;
 
-    if (userGuess === numberToGuess) {
-        feedback.textContent = `Congratulations! You guessed the number in ${guesses} attempts.`;
-        guessInput.disabled = true;
-        guessButton.disabled = true;
-        restartButton.classList.remove('hidden');
-        saveRecord(guesses);
-        loadRecords();
-    } else if (userGuess < numberToGuess) {
-        feedback.textContent = 'Too low! Try again.';
+    if (userGuess === correctColor) {
+        feedback.textContent = 'Correct! Well done!';
+        saveRecord('Correct');
     } else {
-        feedback.textContent = 'Too high! Try again.';
+        feedback.textContent = 'Incorrect. Try again.';
+        saveRecord('Incorrect');
     }
+
+    restartButton.classList.remove('hidden');
 });
 
+// Event listener for restarting the game
 restartButton.addEventListener('click', startNewGame);
 
-// Initialize the game records table
+// Initialize the game records table and start a new game
 loadRecords();
 startNewGame();
