@@ -1,91 +1,32 @@
-// Countdown Timer
-const countdown = document.getElementById('countdown');
-const friendshipDay = new Date('August 4, 2024 00:00:00').getTime();
+// Set the date we're counting down to
+var countDownDate = new Date("August 14, 2024 00:00:00").getTime();
 
-const updateCountdown = () => {
-    const now = new Date().getTime();
-    const distance = friendshipDay - now;
+// Update the count down every 1 second
+var countdownFunction = setInterval(function() {
+    // Get today's date and time
+    var now = new Date().getTime();
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    // Find the distance between now and the count down date
+    var distance = countDownDate - now;
 
-    countdown.innerHTML = `Countdown: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+    // Display the result in the elements
+    document.getElementById("days-number").innerHTML = days;
+    document.getElementById("hours-number").innerHTML = hours;
+    document.getElementById("minutes-number").innerHTML = minutes;
+    document.getElementById("seconds-number").innerHTML = seconds;
+
+    // If the count down is over, write some text 
     if (distance < 0) {
-        clearInterval(interval);
-        countdown.innerHTML = 'Happy Friendship Day!';
-        document.getElementById('content').classList.remove('hidden');
-        document.getElementById('countdown').style.display = 'none';
-        document.querySelector('.game').style.display = 'none';
-    }
-};
-
-const interval = setInterval(updateCountdown, 1000);
-
-// Color Matching Game
-const colorDisplay = document.getElementById('colorDisplay');
-const colorOptions = document.getElementById('colorOptions');
-const submitGuess = document.getElementById('submitGuess');
-const restartButton = document.getElementById('restartButton');
-const feedback = document.getElementById('feedback');
-const recordsBody = document.getElementById('recordsBody');
-const colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
-let correctColor;
-let gameNumber;
-
-// Function to get a random color
-const getRandomColor = () => colors[Math.floor(Math.random() * colors.length)];
-
-// Function to load game records
-const loadRecords = () => {
-    const records = JSON.parse(localStorage.getItem('colorGameRecords')) || [];
-    recordsBody.innerHTML = '';
-    records.forEach(record => {
-        const row = document.createElement('tr');
-        row.innerHTML = `<td>${record.game}</td><td>${record.result}</td>`;
-        recordsBody.appendChild(row);
-    });
-    gameNumber = records.length + 1;
-};
-
-// Function to save game record
-const saveRecord = (result) => {
-    const records = JSON.parse(localStorage.getItem('colorGameRecords')) || [];
-    records.push({ game: gameNumber, result });
-    localStorage.setItem('colorGameRecords', JSON.stringify(records));
-    gameNumber++;
-    loadRecords();
-};
-
-// Function to start a new game
-const startNewGame = () => {
-    correctColor = getRandomColor();
-    colorDisplay.style.backgroundColor = correctColor;
-    feedback.textContent = '';
-    colorOptions.value = '';
-    restartButton.classList.add('hidden');
-};
-
-// Event listener for submitting a guess
-submitGuess.addEventListener('click', () => {
-    const userGuess = colorOptions.value;
-
-    if (userGuess === correctColor) {
-        feedback.textContent = 'Correct! Well done!';
-        saveRecord('Correct');
+        clearInterval(countdownFunction);
+        document.getElementById("countdown").style.display = "none";
+        document.getElementById("message").style.display = "block";
     } else {
-        feedback.textContent = 'Incorrect. Try again.';
-        saveRecord('Incorrect');
+        document.getElementById("message").style.display = "none";
     }
-
-    restartButton.classList.remove('hidden');
-});
-
-// Event listener for restarting the game
-restartButton.addEventListener('click', startNewGame);
-
-// Initialize the game records table and start a new game
-loadRecords();
-startNewGame();
+}, 1000);
