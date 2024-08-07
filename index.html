@@ -3,48 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Friendship Day Wishes</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Countdown to 14th August 2024</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div id="countdown" class="countdown"></div>
-        <div id="content" class="hidden">
-            <h1>Happy Friendship Day!</h1>
-            <h2>To my dearest friend KOWSALYA (HE 👨‍⚕️)</h2>
-            <p>At the short time we ahve been the best friends. Hope this will continue for the long time and u will stay with me and will my cheli for the life time </p>
-            <p class="signature">With love, SAGAR</p>
+  <p>
+    AKKA NEKU KOCHAM ANNA NETHI UNDA BDAY NIGHT 12 KI OPEN CHEY MANANU GA APUDE CHASESEVA 
+    TIME COMPLETE IYANTHA VARAKU WAIT CHEY 
+    ADVANCE HAPPY BIRTHDAY AKKA 🖤
+  </p>
+    <div id="countdown" class="fade-in">
+        <div id="days" class="time-unit-container">
+            <div id="days-number" class="time-unit"></div>
+            <div class="time-label">Days</div>
         </div>
-        <div class="game">
-            <h3>Color Matching Game!</h3>
-            <p>Match the displayed color with its name:</p>
-            <div id="colorDisplay" class="color-box"></div>
-            <select id="colorOptions">
-                <option value="" disabled selected>Select the color</option>
-                <option value="red">Red</option>
-                <option value="green">Green</option>
-                <option value="blue">Blue</option>
-                <option value="yellow">Yellow</option>
-                <option value="purple">Purple</option>
-                <option value="orange">Orange</option>
-            </select>
-            <button id="submitGuess">Submit Guess</button>
-            <button id="restartButton" class="hidden">Restart</button>
-            <p id="feedback"></p>
-            <h4>Game Records:</h4>
-            <table id="recordsTable">
-                <thead>
-                    <tr>
-                        <th>Game</th>
-                        <th>Result</th>
-                    </tr>
-                </thead>
-                <tbody id="recordsBody">
-                </tbody>
-            </table>
+        <div class="separator">:</div>
+        <div id="hours" class="time-unit-container">
+            <div id="hours-number" class="time-unit"></div>
+            <div class="time-label">Hours</div>
+        </div>
+        <div class="separator">:</div>
+        <div id="minutes" class="time-unit-container">
+            <div id="minutes-number" class="time-unit"></div>
+            <div class="time-label">Minutes</div>
+        </div>
+        <div class="separator">:</div>
+        <div id="seconds" class="time-unit-container">
+            <div id="seconds-number" class="time-unit"></div>
+            <div class="time-label">Seconds</div>
         </div>
     </div>
+    <div id="message">Happy Birthday!
+        <a href="#">Click here for your suprise </a>
+        </div>
     <script src="script.js"></script>
 </body>
 </html>
