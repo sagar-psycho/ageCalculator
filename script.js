@@ -1,32 +1,26 @@
+const countDownDate = new Date("August 14, 2024 00:00:00").getTime();
 
-var countDownDate = new Date("August 14, 2024 00:00:00").getTime();
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
 
-// Update the count down every 1 second
-var countdownFunction = setInterval(function() {
-    // Get today's date and time
-    var now = new Date().getTime();
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    // Find the distance between now and the count down date
-    var distance = countDownDate - now;
+    document.getElementById("days-number").textContent = days;
+    document.getElementById("hours-number").textContent = hours;
+    document.getElementById("minutes-number").textContent = minutes;
+    document.getElementById("seconds-number").textContent = seconds;
 
-    // Time calculations for days, hours, minutes and seconds
-    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    // Display the result in the elements
-    document.getElementById("days-number").innerHTML = days;
-    document.getElementById("hours-number").innerHTML = hours;
-    document.getElementById("minutes-number").innerHTML = minutes;
-    document.getElementById("seconds-number").innerHTML = seconds;
-
-    // If the count down is over, write some text 
     if (distance < 0) {
         clearInterval(countdownFunction);
         document.getElementById("countdown").style.display = "none";
         document.getElementById("message").style.display = "block";
-    } else {
-        document.getElementById("message").style.display = "none";
+        document.querySelector('.intro-container').style.display = "none"; // Hide intro-container when countdown ends
     }
-}, 1000);
+}
+
+const countdownFunction = setInterval(updateCountdown, 1000);
+updateCountdown(); // Call it immediately to avoid delay
